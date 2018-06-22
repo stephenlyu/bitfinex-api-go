@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/bitfinexcom/bitfinex-api-go/utils"
+	"github.com/stephenlyu/bitfinex-api-go/utils"
 )
 
 const (
@@ -37,6 +37,7 @@ type Client struct {
 	Pairs         *PairsService
 	Stats         *StatsService
 	Ticker        *TickerService
+	Symbols 	  *SymbolService
 	Account       *AccountService
 	Balances      *BalancesService
 	Offers        *OffersService
@@ -63,6 +64,7 @@ func NewClient() *Client {
 	c.Stats = &StatsService{client: c}
 	c.Account = &AccountService{client: c}
 	c.Ticker = &TickerService{client: c}
+	c.Symbols = &SymbolService{client: c}
 	c.Balances = &BalancesService{client: c}
 	c.Offers = &OffersService{client: c}
 	c.Credits = &CreditsService{client: c}
