@@ -131,3 +131,31 @@ func (s *HistoryService) Trades(pair string, since, until time.Time, limit int, 
 
 	return v, nil
 }
+
+func (s *HistoryService) Orders(limit int) ([]Order, error) {
+	payload := map[string]interface{}{}
+
+	if limit == 0 {
+		limit = 500
+	}
+
+	if limit != 0 {
+		payload["limit"] = limit
+	}
+
+	req, err := s.client.newAuthenticatedRequest("POST", "orders/hist", payload)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var v []Order
+
+	_, err = s.client.do(req, &v)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return v, nil
+}

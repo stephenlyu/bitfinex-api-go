@@ -36,7 +36,6 @@ type Order struct {
 	Timestamp         string
 	IsLive            bool   `json:"is_live"`
 	IsCanceled        bool   `json:"is_cancelled"`
-	IsHidden          bool   `json:"is_hidden"`
 	WasForced         bool   `json:"was_forced"`
 	OriginalAmount    string `json:"original_amount"`
 	RemainingAmount   string `json:"remaining_amount"`
@@ -45,7 +44,7 @@ type Order struct {
 
 // All returns all orders for the authenticated account.
 func (s *OrderService) All() ([]Order, error) {
-	req, err := s.client.newAuthenticatedRequest("GET", "orders", nil)
+	req, err := s.client.newAuthenticatedRequest("POST", "orders", nil)
 	if err != nil {
 		return nil, err
 	}
